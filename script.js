@@ -3,29 +3,42 @@
 
 var sec = 0; 
 var min = 0;
+var hour = 0;
+
+var intervalo;
 
 function start(){
-    setInterval(watch, 1000); //passando a função count chamada em intervalos de 1s
+    intervalo = setInterval(watch, 1000); //passando a função count chamada em intervalos de 1s
 };
 
 
 function pause(){
-    console.log("Start");
+    clearInterval(intervalo)
 };
 
 
 function stop(){
-    console.log("Start");
+    clearInterval(intervalo);
+    sec = 0; 
+    min = 0;
+    hour = 0;
+    document.getElementById("watch").innerText = "00" + " : " +"00" + " : " + "00";
 };
 
 
 function watch (){
-    sec++; //contando os segundos
+    sec++; //contando os segundos segundos +=1
     if(sec == 60){ //quando chegar a 60s, min vai ser 1m
         min++
-        sec = 0
+        sec = 0 //zerando sec
+        if(min == 60){
+            hour++
+            min = 0;
+        }
+
     };
     
-    document.getElementById("watch").innerText = sec;
-    console.log(sec);
+    // show min and sec
+    document.getElementById("watch").innerText = hour + " : " + min + " : " + sec; 
 };
+
